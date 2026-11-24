@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConnectFast Fiber | Internet de Ultra Velocidad en Fibra Óptica</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0a0f1d',
+                            card: '#121929',
+                            blue: '#0066ff',
+                            cyan: '#00f0ff',
+                            purple: '#7000ff',
+                            accent: '#10b981',
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite alternate',
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(0, 240, 255, 0.3)' },
+                            '100%': { boxShadow: '0 0 35px rgba(0, 240, 255, 0.7)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados para efectos Neón y UI de alto nivel */
+        body {
+            background-color: #060913;
+            color: #f1f5f9;
+        }
+        .neon-border {
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .neon-border:hover {
+            border-color: rgba(0, 240, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #7000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0066ff 0%, #7000ff 100%);
+        }
+        .glass-panel {
+            background: rgba(18, 25, 41, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-cyan selection:text-brand-dark">
+
+    <!-- 1. Header / Navegación -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white shadow-lg shadow-brand-blue/30 group-hover:scale-105 transition-transform">
+                        <i data-lucide="zap" class="w-6 h-6 fill-current"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-tight text-white">
+                        Connect<span class="gradient-text">Fast</span>
+                    </span>
+                </a>
+
+                <!-- Nav Links (Desktop) -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                    <a href="#inicio" class="hover:text-brand-cyan transition-colors">Inicio</a>
+                    <a href="#planes" class="hover:text-brand-cyan transition-colors">Planes</a>
+                    <a href="#calculadora" class="hover:text-brand-cyan transition-colors">Calculadora</a>
+                    <a href="#cobertura" class="hover:text-brand-cyan transition-colors">Cobertura</a>
+                    <a href="#faq" class="hover:text-brand-cyan transition-colors">Preguntas Frecuentes</a>
+                    <a href="#contacto" class="hover:text-brand-cyan transition-colors">Contacto</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden sm:flex items-center gap-4">
+                    <a href="#planes" class="px-5 py-2.5 rounded-xl gradient-bg text-white font-semibold text-sm hover:opacity-90 transition-all shadow-lg shadow-brand-blue/20 hover:shadow-brand-cyan/40">
+                        Contratar Ahora
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white rounded-lg focus:outline-none">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-slate-800 px-4 pt-3 pb-6 space-y-3">
+            <a href="#inicio" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800/60">Inicio</a>
+            <a href="#planes" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800/60">Planes de Internet</a>
+            <a href="#calculadora" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800/60">Calculadora de Velocidad</a>
+            <a href="#cobertura" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800/60">Cobertura</a>
+            <a href="#faq" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800/60">Preguntas Frecuentes</a>
+            <a href="#contacto" class="mobile-link block px-3 py-2 rounded-lg text-slate-200 hover:bg-slate-800/60">Contacto</a>
+            <a href="#planes" class="mobile-link block w-full text-center mt-4 px-5 py-3 rounded-xl gradient-bg text-white font-semibold">
+                Contratar Ahora
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-cyan/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-brand-purple/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-brand-cyan/30 text-brand-cyan text-xs sm:text-sm font-medium mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-cyan animate-ping"></span>
+                        ¡Nueva Red de Fibra Óptica Wi-Fi 6 Disponible!
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                        Conexión Ultra Rápida de <span class="gradient-text">Fibra Óptica</span> para tu Hogar y Negocio
+                    </h1>
+
+                    <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Navega a la velocidad de la luz con velocidad simétrica, latencia mínima para gaming y transmisión en 4K/8K sin interrupciones. Soporte 24/7 y 99.9% de estabilidad garantizada.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
+                        <a href="#planes" class="px-8 py-4 rounded-xl gradient-bg text-white font-bold text-base shadow-lg shadow-brand-blue/30 hover:shadow-brand-cyan/40 hover:scale-105 transition-all text-center">
+                            Ver Planes Disponibles
+                        </a>
+                        <a href="#cobertura" class="px-8 py-4 rounded-xl glass-panel text-white font-semibold text-base border border-slate-700 hover:border-brand-cyan/50 hover:bg-slate-800/80 transition-all text-center flex items-center justify-center gap-2">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-brand-cyan"></i>
+                            Consultar Cobertura
+                        </a>
+                    </div>
+
+                    <!-- Verified Coverage Box -->
+                    <div class="p-4 rounded-2xl glass-panel max-w-lg mx-auto lg:mx-0 border border-slate-800">
+                        <p class="text-xs text-slate-400 font-medium mb-2.5 flex items-center gap-1.5">
+                            <i data-lucide="search" class="w-4 h-4 text-brand-cyan"></i>
+                            Verificador rápido de cobertura inmediata:
+                        </p>
+                        <form id="hero-coverage-form" class="flex flex-col sm:flex-row gap-2">
+                            <input 
+                                type="text" 
+                                id="zip-input"
+                                placeholder="Ingresa tu Código Postal o Colonia" 
+                                class="flex-1 bg-slate-900/90 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-cyan transition-colors"
+                                required
+                            >
+                            <button type="submit" class="px-6 py-3 rounded-xl bg-brand-cyan text-brand-dark font-bold text-sm hover:bg-white transition-colors flex items-center justify-center gap-2">
+                                Comprobar
+                            </button>
+                        </form>
+                        <div id="coverage-result" class="mt-3 text-xs hidden"></div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Asset -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <!-- Holographic / Router Card Graphic -->
+                        <div class="w-full aspect-square rounded-3xl glass-panel border border-brand-cyan/30 p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl animate-float">
+                            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-brand-cyan/20 rounded-full blur-3xl"></div>
+                            
+                            <!-- Header status -->
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+                                    <span class="text-xs font-mono text-emerald-400 uppercase tracking-wider">Red En Línea</span>
+                                </div>
+                                <span class="text-xs font-mono text-slate-400">Wi-Fi 6 Ultra</span>
+                            </div>
+
+                            <!-- Speed Gauge Graphic -->
+                            <div class="my-auto text-center py-6">
+                                <div class="relative inline-flex items-center justify-center">
+                                    <svg class="w-48 h-48 transform -rotate-90">
+                                        <circle cx="96" cy="96" r="80" stroke="currentColor" stroke-width="12" class="text-slate-800" fill="transparent" />
+                                        <circle cx="96" cy="96" r="80" stroke="currentColor" stroke-width="12" class="text-brand-cyan" fill="transparent" stroke-dasharray="502" stroke-dashoffset="100" stroke-linecap="round" />
+                                    </svg>
+                                    <div class="absolute flex flex-col items-center">
+                                        <span class="text-5xl font-black text-white tracking-tighter">1,000</span>
+                                        <span class="text-xs font-bold text-brand-cyan tracking-widest uppercase mt-1">MBPS FIBRA</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Highlights -->
+                            <div class="grid grid-cols-2 gap-3 text-center border-t border-slate-800/80 pt-4">
+                                <div>
+                                    <p class="text-[10px] text-slate-400 uppercase">Ping Latencia</p>
+                                    <p class="text-sm font-bold text-white">&lt; 2 ms</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-slate-400 uppercase">Velocidad</p>
+                                    <p class="text-sm font-bold text-brand-cyan">100% Simétrica</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-6 -left-6 bg-slate-900 border border-slate-700 p-4 rounded-2xl shadow-xl flex items-center gap-3">
+                            <div class="p-2.5 bg-emerald-500/10 rounded-xl text-emerald-400">
+                                <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-white">0% Caídas de Red</p>
+                                <p class="text-[11px] text-slate-400">Garantía SLA de servicio</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Benefits Banner -->
+    <section class="py-12 border-y border-slate-800/80 bg-slate-950/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <i data-lucide="arrow-up-down" class="w-8 h-8 mx-auto text-brand-cyan mb-3"></i>
+                    <h4 class="font-bold text-white text-base">Fibra Simétrica</h4>
+                    <p class="text-xs text-slate-400 mt-1">Misma velocidad de subida y bajada</p>
+                </div>
+                <div class="p-4">
+                    <i data-lucide="wifi" class="w-8 h-8 mx-auto text-brand-cyan mb-3"></i>
+                    <h4 class="font-bold text-white text-base">Módem Wi-Fi 6</h4>
+                    <p class="text-xs text-slate-400 mt-1">Incluido gratis en todos los planes</p>
+                </div>
+                <div class="p-4">
+                    <i data-lucide="wrench" class="w-8 h-8 mx-auto text-brand-cyan mb-3"></i>
+                    <h4 class="font-bold text-white text-base">Instalación Gratis</h4>
+                    <p class="text-xs text-slate-400 mt-1">Técnicos certificados a domicilio</p>
+                </div>
+                <div class="p-4">
+                    <i data-lucide="lock-keyhole-open" class="w-8 h-8 mx-auto text-brand-cyan mb-3"></i>
+                    <h4 class="font-bold text-white text-base">Sin Plazo Forzoso</h4>
+                    <p class="text-xs text-slate-400 mt-1">Cancela o cambia de plan cuando quieras</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Sección de Planes y Tarifas -->
+    <section id="planes" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-3">Planes a tu medida</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Elige la velocidad perfecta para ti</h3>
+                <p class="text-slate-400 mt-4 text-base">Todos los planes incluyen instalación sin costo, módem Wi-Fi 6 de última generación y soporte prioritario.</p>
+            </div>
+
+            <!-- Grid de Planes -->
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Plan Básico -->
+                <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between neon-border relative group">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-semibold">Hogar Básico</span>
+                            <i data-lucide="home" class="w-5 h-5 text-slate-400"></i>
+                        </div>
+                        <h4 class="text-2xl font-black text-white">100 MEGAS</h4>
+                        <p class="text-slate-400 text-xs mt-1">Ideal para navegación diaria y streaming HD.</p>
+                        
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white">$399</span>
+                            <span class="text-slate-400 text-sm">/mes</span>
+                        </div>
+
+                        <ul class="space-y-3.5 border-t border-slate-800 pt-6 text-sm text-slate-300">
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                100 Mbps Simétricos
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Módem Wi-Fi 6 de Doble Banda
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Conecta hasta 5-8 dispositivos
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Sin plazo forzoso
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="selectPlanAndScroll('Plan Básico - 100 Megas')" class="mt-8 w-full py-3.5 px-4 rounded-xl border border-brand-cyan/40 hover:bg-brand-cyan hover:text-brand-dark text-brand-cyan font-bold text-sm transition-all text-center">
+                        Solicitar Plan
+                    </button>
+                </div>
+
+                <!-- Plan Familiar (Popular) -->
+                <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between border-2 border-brand-cyan relative shadow-2xl shadow-brand-cyan/10 transform lg:-translate-y-4">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 gradient-bg text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                        Más Popular
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-6 pt-2">
+                            <span class="px-3 py-1 rounded-full bg-brand-cyan/20 text-brand-cyan text-xs font-semibold">Pro Familiar</span>
+                            <i data-lucide="users" class="w-5 h-5 text-brand-cyan"></i>
+                        </div>
+                        <h4 class="text-2xl font-black text-white">300 MEGAS</h4>
+                        <p class="text-slate-400 text-xs mt-1">Perfecto para familias, Home Office y 4K Streaming simultáneo.</p>
+                        
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white">$599</span>
+                            <span class="text-slate-400 text-sm">/mes</span>
+                        </div>
+
+                        <ul class="space-y-3.5 border-t border-slate-800 pt-6 text-sm text-slate-300">
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                300 Mbps Simétricos
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Módem Wi-Fi 6 de Ultra Cobertura
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Conecta 10-15 dispositivos
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Prioridad en Soporte Técnico
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Instalación Gratis Garantizada
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="selectPlanAndScroll('Plan Familiar - 300 Megas')" class="mt-8 w-full py-3.5 px-4 rounded-xl gradient-bg text-white font-bold text-sm shadow-lg hover:opacity-90 transition-all text-center">
+                        Solicitar Plan
+                    </button>
+                </div>
+
+                <!-- Plan Gamer / Giga -->
+                <div class="glass-panel rounded-3xl p-8 flex flex-col justify-between neon-border relative group">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="px-3 py-1 rounded-full bg-purple-950 text-purple-300 text-xs font-semibold">Gamer & Pro</span>
+                            <i data-lucide="gamepad-2" class="w-5 h-5 text-purple-400"></i>
+                        </div>
+                        <h4 class="text-2xl font-black text-white">1,000 MEGAS <span class="text-xs text-brand-cyan block font-normal">(1 GIGA)</span></h4>
+                        <p class="text-slate-400 text-xs mt-1">Para creadores de contenido, gamers exigentes y oficinas.</p>
+                        
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white">$999</span>
+                            <span class="text-slate-400 text-sm">/mes</span>
+                        </div>
+
+                        <ul class="space-y-3.5 border-t border-slate-800 pt-6 text-sm text-slate-300">
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                1,000 Mbps Ultra Velocidad
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Módem Gaming Mesh / Wi-Fi 6E
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Dispositivos ilimitados
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                Latencia ultrabaja (&lt; 2ms)
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-cyan shrink-0"></i>
+                                IP Pública Dinámica / Asistencia VIP
+                            </li>
+                        </ul>
+                    </div>
+                    <button onclick="selectPlanAndScroll('Plan Gamer - 1000 Megas')" class="mt-8 w-full py-3.5 px-4 rounded-xl border border-brand-cyan/40 hover:bg-brand-cyan hover:text-brand-dark text-brand-cyan font-bold text-sm transition-all text-center">
+                        Solicitar Plan
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Calculadora de Velocidad Recomendada -->
+    <section id="calculadora" class="py-20 bg-slate-950/80 border-y border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-slate-800 relative overflow-hidden">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-purple/20 rounded-full blur-3xl"></div>
+
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="p-3 bg-brand-cyan/10 rounded-2xl text-brand-cyan inline-block mb-3">
+                        <i data-lucide="calculator" class="w-6 h-6"></i>
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Calculadora Inteligente de Velocidad</h3>
+                    <p class="text-slate-400 text-sm mt-2">¿No sabes qué plan elegir? Responde estas breves opciones y descubre tu velocidad ideal.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <!-- Formulario de opciones -->
+                    <div class="space-y-6">
+                        <!-- Dispositivos Slider -->
+                        <div>
+                            <div class="flex justify-between text-sm font-medium text-slate-300 mb-2">
+                                <span>Número de Dispositivos Conectados:</span>
+                                <span id="devices-val" class="font-bold text-brand-cyan">5 Dispositivos</span>
+                            </div>
+                            <input type="range" id="devices-range" min="1" max="25" value="5" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-cyan">
+                        </div>
+
+                        <!-- Tipo de Uso -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-300 mb-2">Uso principal del internet:</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="use-case" value="basic" class="peer hidden" checked>
+                                    <div class="p-3 rounded-xl border border-slate-800 bg-slate-900/60 text-xs font-semibold text-slate-300 peer-checked:border-brand-cyan peer-checked:bg-brand-cyan/10 peer-checked:text-white transition-all text-center">
+                                        Redes & HD Video
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="use-case" value="office" class="peer hidden">
+                                    <div class="p-3 rounded-xl border border-slate-800 bg-slate-900/60 text-xs font-semibold text-slate-300 peer-checked:border-brand-cyan peer-checked:bg-brand-cyan/10 peer-checked:text-white transition-all text-center">
+                                        Home Office / Zoom
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="use-case" value="gaming" class="peer hidden">
+                                    <div class="p-3 rounded-xl border border-slate-800 bg-slate-900/60 text-xs font-semibold text-slate-300 peer-checked:border-brand-cyan peer-checked:bg-brand-cyan/10 peer-checked:text-white transition-all text-center">
+                                        Gaming Online
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="use-case" value="streaming" class="peer hidden">
+                                    <div class="p-3 rounded-xl border border-slate-800 bg-slate-900/60 text-xs font-semibold text-slate-300 peer-checked:border-brand-cyan peer-checked:bg-brand-cyan/10 peer-checked:text-white transition-all text-center">
+                                        Streaming 4K / Creadores
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resultado Recomendado -->
+                    <div class="bg-slate-900/90 rounded-2xl p-6 border border-brand-cyan/30 text-center relative flex flex-col justify-center items-center h-full">
+                        <span class="text-xs uppercase font-bold text-slate-400 tracking-wider">Tu Plan Recomendado</span>
+                        <h4 id="rec-plan-title" class="text-3xl font-black text-brand-cyan my-2">Plan Básico - 100 MEGAS</h4>
+                        <p id="rec-plan-desc" class="text-xs text-slate-300 mb-6 max-w-xs">Suficiente velocidad para tus 5 dispositivos con excelente estabilidad.</p>
+                        
+                        <button id="rec-plan-btn" onclick="contractRecommendedPlan()" class="px-6 py-3 rounded-xl gradient-bg text-white font-bold text-sm shadow-lg hover:scale-105 transition-all">
+                            Contratar Este Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Cobertura y Testimonios -->
+    <section id="cobertura" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                <div>
+                    <h2 class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-3">Expansión Continua</h2>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-white mb-6">Red de Fibra Óptica en toda la Ciudad</h3>
+                    <p class="text-slate-300 text-base mb-6 leading-relaxed">
+                        Nuestra infraestructura desplegada con tecnología FTTH (Fiber to the Home) nos permite ofrecer la menor tasa de atenuación y máximo ancho de banda garantizado.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 rounded-lg bg-brand-cyan/10 text-brand-cyan mt-1">
+                                <i data-lucide="check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-bold text-sm">Cobertura en Zonas Residenciales y Comerciales</h5>
+                                <p class="text-slate-400 text-xs">Conexión directa desde la central hasta tu módem.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="p-2 rounded-lg bg-brand-cyan/10 text-brand-cyan mt-1">
+                                <i data-lucide="check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-white font-bold text-sm">Instalación Limpia y Rápida en &lt; 24 Horas</h5>
+                                <p class="text-slate-400 text-xs">Agendamos tu cita inmediatamente tras la validación.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Simulación de Mapa Interactivo -->
+                <div class="glass-panel rounded-3xl p-6 border border-slate-800 relative overflow-hidden h-[380px] flex flex-col justify-between bg-slate-900/60">
+                    <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#00f0ff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                    
+                    <div class="relative z-10 flex justify-between items-center">
+                        <span class="text-xs font-mono text-brand-cyan flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-brand-cyan animate-ping"></span>
+                            MAPA DE COBERTURA EN TIEMPO REAL
+                        </span>
+                        <span class="text-xs text-slate-400">98.4% Disponibilidad</span>
+                    </div>
+
+                    <!-- Visual Nodes -->
+                    <div class="relative z-10 my-auto flex justify-center items-center">
+                        <div class="relative">
+                            <div class="w-24 h-24 rounded-full bg-brand-cyan/10 border border-brand-cyan flex items-center justify-center animate-pulse">
+                                <i data-lucide="radio" class="w-10 h-10 text-brand-cyan"></i>
+                            </div>
+                            <div class="absolute -top-6 -left-12 px-3 py-1 rounded-full glass-panel text-[10px] font-bold text-white border border-brand-cyan/40">Zona Centro - Activa</div>
+                            <div class="absolute -bottom-6 -right-12 px-3 py-1 rounded-full glass-panel text-[10px] font-bold text-white border border-brand-cyan/40">Zona Norte - Activa</div>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 text-center">
+                        <p class="text-xs text-slate-400">¿Dudas sobre tu calle? Consulta directamente con un asesor vía WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonios -->
+            <div class="pt-12 border-t border-slate-800">
+                <div class="text-center mb-12">
+                    <h3 class="text-2xl font-bold text-white">Lo que dicen nuestros usuarios</h3>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                        <div class="flex text-amber-400 mb-3">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-4">"Cambié de mi proveedor anterior a ConnectFast por recomendación. Llevo 6 meses y la velocidad nunca ha bajado, ¡el ping en juegos es de 12ms!"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-brand-cyan/20 text-brand-cyan flex items-center justify-center font-bold text-sm">CR</div>
+                            <div>
+                                <h5 class="text-white text-xs font-bold">Carlos Ramírez</h5>
+                                <p class="text-slate-500 text-[11px]">Plan Gamer 1 Gigas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                        <div class="flex text-amber-400 mb-3">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-4">"Hago Home Office y las videollamadas antes se congelaban. Desde que me instalaron los 300 Megas no he tenido un solo problema."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-brand-purple/20 text-purple-400 flex items-center justify-center font-bold text-sm">MG</div>
+                            <div>
+                                <h5 class="text-white text-xs font-bold">Mariana Gómez</h5>
+                                <p class="text-slate-500 text-[11px]">Plan Pro 300 Megas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-800">
+                        <div class="flex text-amber-400 mb-3">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm mb-4">"Atención al cliente excelente. Vinieron a instalar al día siguiente de pedirlo y la velocidad simétrica de subida es real."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">AL</div>
+                            <div>
+                                <h5 class="text-white text-xs font-bold">Alejandro López</h5>
+                                <p class="text-slate-500 text-[11px]">Plan Básico 100 Megas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Preguntas Frecuentes (FAQ Accordion) -->
+    <section id="faq" class="py-20 bg-slate-950/60 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-xs font-bold text-brand-cyan tracking-widest uppercase mb-2">Resuelve tus dudas</h2>
+                <h3 class="text-3xl font-extrabold text-white">Preguntas Frecuentes</h3>
+            </div>
+
+            <div class="space-y-4" id="faq-accordion">
+                <!-- FAQ Item 1 -->
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left font-semibold text-white flex justify-between items-center gap-4 hover:text-brand-cyan transition-colors">
+                        <span>¿Qué significa que la Fibra Óptica sea Simétrica?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-cyan transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-400 text-sm leading-relaxed">
+                        Significa que tienes la misma velocidad tanto para descargar contenido (ver películas, navegar) como para subir archivos (enviar correos pesados, realizar videollamadas o hacer streamings). Las conexiones tradicionales suelen ofrecer mucha menos velocidad de subida.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left font-semibold text-white flex justify-between items-center gap-4 hover:text-brand-cyan transition-colors">
+                        <span>¿Tienen plazos forzosos o permanencia mínima?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-cyan transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-400 text-sm leading-relaxed">
+                        No. En ConnectFast creemos en la calidad de nuestro servicio. Puedes cancelar o cambiar de plan en cualquier momento sin penalizaciones adicionales.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left font-semibold text-white flex justify-between items-center gap-4 hover:text-brand-cyan transition-colors">
+                        <span>¿Cuánto tarda la instalación una vez solicitada?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-cyan transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-400 text-sm leading-relaxed">
+                        Una vez que completas tu solicitud de contratación y confirmamos la cobertura en tu domicilio, un técnico acudirá en un plazo máximo de 24 a 48 horas hábiles.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left font-semibold text-white flex justify-between items-center gap-4 hover:text-brand-cyan transition-colors">
+                        <span>¿El módem Wi-Fi 6 tiene costo extra?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-brand-cyan transform transition-transform duration-200"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-4 text-slate-400 text-sm leading-relaxed">
+                        No, el módem Wi-Fi 6 de alta potencia está incluido en comodato sin ningún costo adicional en todos nuestros paquetes de internet.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Formulario de Contacto / Solicitud -->
+    <section id="contacto" class="py-24 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-slate-800 relative">
+                <div class="text-center mb-10">
+                    <h3 class="text-3xl font-extrabold text-white">Solicita tu Instalación Hoy</h3>
+                    <p class="text-slate-400 text-sm mt-2">Déjanos tus datos y un ejecutivo se comunicará contigo en minutos.</p>
+                </div>
+
+                <form id="main-contact-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Nombre Completo</label>
+                            <input type="text" name="nombre" required placeholder="Ej. Juan Pérez" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-cyan">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Teléfono de Contacto</label>
+                            <input type="tel" name="telefono" required placeholder="Ej. 55 1234 5678" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-cyan">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Correo Electrónico</label>
+                            <input type="email" name="correo" required placeholder="juan@correo.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-cyan">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Plan Deseado</label>
+                            <select id="form-plan-select" name="plan" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-cyan">
+                                <option value="Plan Básico - 100 Megas">Plan Básico - 100 Megas ($399/mes)</option>
+                                <option value="Plan Familiar - 300 Megas" selected>Plan Familiar - 300 Megas ($599/mes)</option>
+                                <option value="Plan Gamer - 1000 Megas">Plan Gamer Giga - 1,000 Megas ($999/mes)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 uppercase mb-2">Dirección Completa (Calle, Número, Colonia y C.P.)</label>
+                        <textarea name="direccion" rows="3" required placeholder="Ingresa la dirección exacta donde deseas el servicio" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-cyan"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl gradient-bg text-white font-bold text-base shadow-xl hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                        Enviar Solicitud de Contratación
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800 text-slate-400 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: Brand info -->
+                <div class="space-y-4">
+                    <a href="#" class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg gradient-bg flex items-center justify-center text-white">
+                            <i data-lucide="zap" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <span class="text-xl font-extrabold text-white">Connect<span class="gradient-text">Fast</span></span>
+                    </a>
+                    <p class="text-xs leading-relaxed">
+                        Proveedor líder de internet de ultra alta velocidad por fibra óptica simétrica para hogares y empresas.
+                    </p>
+                </div>
+
+                <!-- Col 2: Enlaces Rápidos -->
+                <div>
+                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Navegación</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#inicio" class="hover:text-brand-cyan transition-colors">Inicio</a></li>
+                        <li><a href="#planes" class="hover:text-brand-cyan transition-colors">Planes de Fibra</a></li>
+                        <li><a href="#calculadora" class="hover:text-brand-cyan transition-colors">Calculadora de Ancho de Banda</a></li>
+                        <li><a href="#cobertura" class="hover:text-brand-cyan transition-colors">Zonas de Cobertura</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Soporte -->
+                <div>
+                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Soporte y Atención</h5>
+                    <ul class="space-y-2.5 text-xs">
+                        <li class="flex items-center gap-2"><i data-lucide="phone" class="w-3.5 h-3.5 text-brand-cyan"></i> 800-000-FAST (3278)</li>
+                        <li class="flex items-center gap-2"><i data-lucide="mail" class="w-3.5 h-3.5 text-brand-cyan"></i> soporte@connectfast.com</li>
+                        <li class="flex items-center gap-2"><i data-lucide="clock" class="w-3.5 h-3.5 text-brand-cyan"></i> Atención 24 horas / 7 días</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Redes Sociales -->
+                <div>
+                    <h5 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Síguenos</h5>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-xl glass-panel flex items-center justify-center hover:text-brand-cyan transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-xl glass-panel flex items-center justify-center hover:text-brand-cyan transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-xl glass-panel flex items-center justify-center hover:text-brand-cyan transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs gap-4">
+                <p>&copy; 2026 ConnectFast Fiber Inc. Todos los derechos reservados.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:underline">Aviso de Privacidad</a>
+                    <a href="#" class="hover:underline">Términos del Servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript interactivo -->
+    <script>
+        // Inicializar Lucide Icons
+        lucide.createIcons();
+
+        // Menu Mobile Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Verificador de Cobertura Hero
+        const heroForm = document.getElementById('hero-coverage-form');
+        const zipInput = document.getElementById('zip-input');
+        const coverageResult = document.getElementById('coverage-result');
+
+        heroForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const value = zipInput.value.trim();
+            if(value) {
+                coverageResult.classList.remove('hidden', 'text-rose-400');
+                coverageResult.classList.add('text-emerald-400');
+                coverageResult.innerHTML = `<i data-lucide="check-circle" class="inline w-3.5 h-3.5 mr-1"></i> ¡Excelente noticia! La zona "${value}" cuenta con Cobertura de Fibra Óptica Wi-Fi 6 de alta velocidad.`;
+                lucide.createIcons();
+            }
+        });
+
+        // FAQ Accordion
+        const faqButtons = document.querySelectorAll('.faq-btn');
+        faqButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('[data-lucide="chevron-down"]');
+                
+                content.classList.toggle('hidden');
+                if(icon) {
+                    icon.classList.toggle('rotate-180');
+                }
+            });
+        });
+
+        // Calculadora de Velocidad
+        const devicesRange = document.getElementById('devices-range');
+        const devicesVal = document.getElementById('devices-val');
+        const recPlanTitle = document.getElementById('rec-plan-title');
+        const recPlanDesc = document.getElementById('rec-plan-desc');
+        const useCaseRadios = document.querySelectorAll('input[name="use-case"]');
+
+        function updateRecommendation() {
+            const numDevices = parseInt(devicesRange.value);
+            devicesVal.textContent = `${numDevices} Dispositivo${numDevices > 1 ? 's' : ''}`;
+            
+            let selectedUse = 'basic';
+            useCaseRadios.forEach(radio => {
+                if(radio.checked) selectedUse = radio.value;
+            });
+
+            if (numDevices <= 5 && selectedUse === 'basic') {
+                recPlanTitle.textContent = "Plan Básico - 100 MEGAS";
+                recPlanDesc.textContent = "Ideal para tus " + numDevices + " dispositivos con navegación fluida y streaming HD.";
+            } else if (numDevices <= 12 || selectedUse === 'office' || selectedUse === 'gaming') {
+                recPlanTitle.textContent = "Plan Familiar - 300 MEGAS";
+                recPlanDesc.textContent = "Perfecto para " + numDevices + " dispositivos con streaming 4K y videoconferencias sin cortes.";
+            } else {
+                recPlanTitle.textContent = "Plan Gamer - 1,000 MEGAS (1 Giga)";
+                recPlanDesc.textContent = "La máxima potencia para tus " + numDevices + " dispositivos, gaming competitivo y cargas pesadas.";
+            }
+        }
+
+        devicesRange.addEventListener('input', updateRecommendation);
+        useCaseRadios.forEach(radio => radio.addEventListener('change', updateRecommendation));
+
+        // Función para seleccionar plan y desplazarse al formulario de contacto
+        function selectPlanAndScroll(planName) {
+            const select = document.getElementById('form-plan-select');
+            if (select) {
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value.toLowerCase().includes(planName.toLowerCase().split(' - ')[0])) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            const contactSection = document.getElementById('contacto');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Función específica para el botón de la Calculadora de Velocidad
+        function contractRecommendedPlan() {
+            const titleText = document.getElementById('rec-plan-title').textContent;
+            selectPlanAndScroll(titleText);
+        }
+
+        // Envío de formulario al microservicio de contacto en Docker
+        const mainContactForm = document.getElementById('main-contact-form');
+        if (mainContactForm) {
+            mainContactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = mainContactForm.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.textContent = 'Enviando solicitud...';
+
+                const formData = new FormData(mainContactForm);
+                const payload = Object.fromEntries(formData.entries());
+
+                try {
+                    const response = await fetch('http://localhost:3001/api/contacto', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) throw new Error('Error en el servidor');
+                    const data = await response.json();
+                    window.location.href = `Gracias.html?folio=${encodeURIComponent(data.folio)}`;
+                } catch (error) {
+                    alert('No se pudo conectar con el servicio de solicitudes. Verifica que los contenedores Docker estén activos.');
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
